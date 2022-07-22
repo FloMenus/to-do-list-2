@@ -7,18 +7,21 @@ class App extends Component {
     super();
     this.state = {
       tasks: [],
-
     };
   }
 
   addTask = (description) => {
-    const task = { description: description, status: "To do", id: new Date().getTime() };
+    const task = {
+      description: description,
+      status: "To do",
+      // id: new Date().getTime(),
+    };
 
     const clonedTasksAdd = [...this.state.tasks, task];
     this.setState({
       tasks: clonedTasksAdd,
     });
-    console.log(this.state.tasks)
+    console.log(this.state.tasks);
   };
   deleteTask = (task) => {
     const clonedTasks = [...this.state.tasks];
@@ -29,23 +32,37 @@ class App extends Component {
     });
   };
   editTask = (task) => {
-   const clonedTasks = [...this.state.tasks];
-   const index = clonedTasks.indexOf(task);
-    clonedTasks[index].editing = true
-    this.setState ({
-      tasks: clonedTasks
-    })
+    const clonedTasks = [...this.state.tasks];
+    const index = clonedTasks.indexOf(task);
+    clonedTasks[index].editing = true;
+    this.setState({
+      tasks: clonedTasks,
+    });
+  };
+  handleDescriptionChange = (e, task) => {
+    const clonedTasks = [...this.state.tasks];
+    const index = clonedTasks.indexOf(task);
+    clonedTasks[index].description= e.target.value
+    this.setState({
+      tasks: clonedTasks,
+    });
   }
-  
+  handleStatusChange = (e, task) => {
+    const clonedTasks = [...this.state.tasks];
+    const index = clonedTasks.indexOf(task);
+    clonedTasks[index].status= e.target.value
+    this.setState({
+      tasks: clonedTasks,
+    });
+  }
   validateTask = (task) => {
     const clonedTasks = [...this.state.tasks];
-   const index = clonedTasks.indexOf(task);
-    clonedTasks[index].editing = false
-    this.setState ({
-      tasks: clonedTasks
-    })
-  }
-
+    const index = clonedTasks.indexOf(task);
+    clonedTasks[index].editing = false;
+    this.setState({
+      tasks: clonedTasks,
+    });
+  };
 
   render() {
     return (
@@ -61,15 +78,20 @@ class App extends Component {
               deleteTask={() => {
                 this.deleteTask(task);
               }}
-              editing = {task.editing}
+              editing={task.editing}
               editTask={() => {
                 this.editTask(task);
               }}
-              validate = {task.validate}
-              validateTask = {() => {
-                this.validateTask(task)
+              descriptionChange={(e) => {
+                this.handleDescriptionChange(e, task);
               }}
-
+              statusChange = {(e) => {
+                this.handleStatusChange(e, task);
+              }}
+              validate={task.validate}
+              validateTask={() => {
+                this.validateTask(task);
+              }}
             />
           );
         })}

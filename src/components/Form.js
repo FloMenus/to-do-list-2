@@ -35,6 +35,10 @@ class Form extends Component {
             required
           ></input>
         </form>
+        <button value="All">All</button>
+        <button value="To do">To Do</button>
+        <button value="Doing">Doing</button>
+        <button value="Done">Done</button>
       </div>
     );
   }
