@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import Form, { Component } from
+import Form from './components/Form'
+
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      tasks: []
+    }
+  }
+
+  addTask = () => {
+    
+  }
+
   render() {
     return (
-      <div>
-        
-      </div>
+      <>
+        <Form />
+      </>
     );
   }
 }
