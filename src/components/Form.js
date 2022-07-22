@@ -35,10 +35,18 @@ class Form extends Component {
             required
           ></input>
         </form>
-        <button value="All">All</button>
-        <button value="To do">To Do</button>
-        <button value="Doing">Doing</button>
-        <button value="Done">Done</button>
+        <button value="All" onClick={this.props.newTasks}>
+          All
+        </button>
+        <button value="To do" onClick={this.props.newTasks}>
+          To Do
+        </button>
+        <button value="Doing" onClick={this.props.newTasks}>
+          Doing
+        </button>
+        <button value="Done" onClick={this.props.newTasks}>
+          Done
+        </button>
       </div>
     );
   }

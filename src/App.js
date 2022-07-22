@@ -7,6 +7,7 @@ class App extends Component {
     super();
     this.state = {
       tasks: [],
+      newTasks: [],
     };
   }
 
@@ -42,19 +43,19 @@ class App extends Component {
   handleDescriptionChange = (e, task) => {
     const clonedTasks = [...this.state.tasks];
     const index = clonedTasks.indexOf(task);
-    clonedTasks[index].description= e.target.value
+    clonedTasks[index].description = e.target.value;
     this.setState({
       tasks: clonedTasks,
     });
-  }
+  };
   handleStatusChange = (e, task) => {
     const clonedTasks = [...this.state.tasks];
     const index = clonedTasks.indexOf(task);
-    clonedTasks[index].status= e.target.value
+    clonedTasks[index].status = e.target.value;
     this.setState({
       tasks: clonedTasks,
     });
-  }
+  };
   validateTask = (task) => {
     const clonedTasks = [...this.state.tasks];
     const index = clonedTasks.indexOf(task);
@@ -64,10 +65,32 @@ class App extends Component {
     });
   };
 
+  filteredTask = (e) => {
+    this.setState(
+      {
+        tasks: this.state.newTasks,
+      },
+      () => {
+        const clonedTask = [...this.state.tasks];
+        let filteredTask = clonedTask.filter((task) => {
+          return task.status === e.target.value;
+        });
+        e.target.value !== "All"
+          ? this.setState({ tasks: filteredTask })
+          : this.setState({ tasks: clonedTask });
+      }
+    );
+  };
+
   render() {
     return (
       <>
-        <Form addTask={this.addTask} />
+        <Form
+          addTask={this.addTask}
+          newTasks={(e) => {
+            this.filteredTask(e);
+          }}
+        />
         {this.state.tasks.map((task) => {
           return (
             <List
@@ -85,7 +108,7 @@ class App extends Component {
               descriptionChange={(e) => {
                 this.handleDescriptionChange(e, task);
               }}
-              statusChange = {(e) => {
+              statusChange={(e) => {
                 this.handleStatusChange(e, task);
               }}
               validate={task.validate}
