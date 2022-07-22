@@ -4,13 +4,9 @@ class List extends Component {
   render() {
     return (
       <div>
-        {this.props.tasks.map((task) => (
-          <div>
-            <h2>{task.description}</h2>
-            <p>{task.status}</p>
+            <h2>{this.props.description}</h2>
+            <p>{this.props.status}</p>
             <button onClick={this.props.deleteTask}>X</button>
-          </div>
-        ))}
       </div>
     );
   }

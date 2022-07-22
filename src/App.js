@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "./components/Form";
-import List from "./components/List"
+import List from "./components/List";
 
 class App extends Component {
   constructor() {
@@ -15,20 +15,34 @@ class App extends Component {
 
     const clonedTasksAdd = [...this.state.tasks, task];
     this.setState({
-      tasks: clonedTasksAdd
-    })
+      tasks: clonedTasksAdd,
+    });
   };
-  deleteTask = (index) => {
-    this.setState ({
-      tasks: [...this.state.tasks].splice(index, 1)
-    })
-  }
+  deleteTask = (task) => {
+    const clonedTasks = [...this.state.tasks];
+    const index = clonedTasks.indexOf(task);
+    clonedTasks.splice(index, 1);
+    this.setState({
+      tasks: clonedTasks,
+    });
+  };
 
   render() {
     return (
       <>
         <Form addTask={this.addTask} />
-        <List tasks={this.state.tasks} deleteTask={this.deleteTask}/>
+        {this.state.tasks.map((task) => {
+          return (
+            <List
+              tasks={this.state.tasks}
+              description={task.description}
+              status={task.status}
+              deleteTask={() => {
+                this.deleteTask(task);
+              }}
+            />
+          );
+        })}
       </>
     );
   }
