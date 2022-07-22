@@ -7,7 +7,7 @@ class App extends Component {
     super();
     this.state = {
       tasks: [],
-      editing: false,
+
     };
   }
 
@@ -29,10 +29,21 @@ class App extends Component {
     });
   };
   editTask = (task) => {
+   const clonedTasks = [...this.state.tasks];
+   const index = clonedTasks.indexOf(task);
+    clonedTasks[index].editing = true
     this.setState ({
-      editing: true,
+      tasks: clonedTasks
     })
-
+  }
+  
+  validateTask = (task) => {
+    const clonedTasks = [...this.state.tasks];
+   const index = clonedTasks.indexOf(task);
+    clonedTasks[index].editing = false
+    this.setState ({
+      tasks: clonedTasks
+    })
   }
 
 
@@ -50,8 +61,13 @@ class App extends Component {
               deleteTask={() => {
                 this.deleteTask(task);
               }}
+              editing = {task.editing}
               editTask={() => {
                 this.editTask(task);
+              }}
+              validate = {task.validate}
+              validateTask = {() => {
+                this.validateTask(task)
               }}
 
             />
