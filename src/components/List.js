@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class List extends Component {
-    render() {
-        console.log(this)
-        return (
-            <div>
-                <p>{this.props.tasks}</p>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        {this.props.tasks.map((task) => (
+          <div>
+            <h2>{task.description}</h2>
+            <p>{task.status}</p>
+            <button onClick={this.props.deleteTask}>X</button>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default List;

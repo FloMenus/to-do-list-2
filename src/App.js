@@ -13,15 +13,22 @@ class App extends Component {
   addTask = (description) => {
     const task = { description: description, status: "To do" };
 
-    const clonedTasks = [...this.state.tasks, task];
-    this.state.tasks = clonedTasks;
+    const clonedTasksAdd = [...this.state.tasks, task];
+    this.setState({
+      tasks: clonedTasksAdd
+    })
   };
+  deleteTask = (index) => {
+    this.setState ({
+      tasks: [...this.state.tasks].splice(index, 1)
+    })
+  }
 
   render() {
     return (
       <>
         <Form addTask={this.addTask} />
-        <List tasks={this.state.tasks}/>
+        <List tasks={this.state.tasks} deleteTask={this.deleteTask}/>
       </>
     );
   }
