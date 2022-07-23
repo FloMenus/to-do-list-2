@@ -21,6 +21,7 @@ class App extends Component {
     const clonedTasksAdd = [...this.state.tasks, task];
     this.setState({
       tasks: clonedTasksAdd,
+      newTasks: clonedTasksAdd,
     });
     console.log(this.state.tasks);
   };
@@ -46,6 +47,7 @@ class App extends Component {
     clonedTasks[index].description = e.target.value;
     this.setState({
       tasks: clonedTasks,
+      newTasks: clonedTasks,
     });
   };
   handleStatusChange = (e, task) => {
@@ -54,6 +56,7 @@ class App extends Component {
     clonedTasks[index].status = e.target.value;
     this.setState({
       tasks: clonedTasks,
+      newTasks: clonedTasks,
     });
   };
   validateTask = (task) => {
@@ -62,6 +65,7 @@ class App extends Component {
     clonedTasks[index].editing = false;
     this.setState({
       tasks: clonedTasks,
+      newTasks: clonedTasks,
     });
   };
 
@@ -71,13 +75,13 @@ class App extends Component {
         tasks: this.state.newTasks,
       },
       () => {
-        const clonedTask = [...this.state.tasks];
+        let clonedTask = [...this.state.tasks];
         let filteredTask = clonedTask.filter((task) => {
           return task.status === e.target.value;
         });
         e.target.value !== "All"
-          ? this.setState({ tasks: filteredTask })
-          : this.setState({ tasks: clonedTask });
+          ? this.setState({tasks: filteredTask})
+          : this.setState({tasks: clonedTask});
       }
     );
   };
