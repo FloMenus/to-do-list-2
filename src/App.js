@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "./components/Form";
 import List from "./components/List";
+import './App.css'
 
 class App extends Component {
   constructor() {
@@ -89,6 +90,7 @@ class App extends Component {
   render() {
     return (
       <>
+        <h1 className="text-7xl text-center mt-10 font-bold text-white">To do List</h1>
         <Form
           addTask={this.addTask}
           newTasks={(e) => {
